@@ -1,0 +1,32 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+unsigned long long recur_fib(int n) {
+    if (n <= 1)
+        return n;
+    return recur_fib(n - 1) + recur_fib(n - 2);
+}
+
+vector<long long> fibonacci_sequence_recursive(int term_count) {
+    vector<long long> sequence;
+    for (int i = 0; i < term_count; i++) {
+        sequence.push_back(recur_fib(i));
+    }
+    return sequence;
+}
+
+int main() {
+    int term_count = 10; // You can change this value to print more terms
+    vector<long long> sequence = fibonacci_sequence_recursive(term_count);
+
+    cout << "Fibonacci series: ";
+    for (const auto& num : sequence) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
