@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+unsigned long long loop_memoized_fib(int n, vector<unsigned long long>& memo) {
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+
+    memo[0] = 0;
+    memo[1] = 1;
+
+    for (int i = 2; i <= n; i++) {
+        memo[i] = memo[i - 1] + memo[i - 2];
+    }
+
+    return memo[n];
+}
+
+vector<unsigned long long> fibonacci_sequence_loop_memoized(int term_count) {
+    vector<unsigned long long> memo(term_count, -1);
+    vector<unsigned long long> sequence;
+
+    for (int i = 0; i < term_count; i++) {
+        sequence.push_back(loop_memoized_fib(i, memo));
+    }
+
+    return sequence;
+}
+
+int main() {
+    int term_count = 10; // You can change this value to print more terms
+    vector<unsigned long long> sequence = fibonacci_sequence_loop_memoized(term_count);
+
+    cout << "Fibonacci series: ";
+    for (const auto& num : sequence) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
