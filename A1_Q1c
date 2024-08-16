@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+unsigned long long recursive_memoized_fib(int n, vector<unsigned long long>& memo) {
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    if (memo[n] != -1) return memo[n];
+
+    memo[n] = recursive_memoized_fib(n - 1, memo) + recursive_memoized_fib(n - 2, memo);
+    return memo[n];
+}
+
+vector<unsigned long long> fibonacci_sequence_recursive_memoized(int term_count) {
+    vector<unsigned long long> memo(term_count, -1);
+    vector<unsigned long long> sequence;
+
+    for (int i = 0; i < term_count; i++) {
+        sequence.push_back(recursive_memoized_fib(i, memo));
+    }
+
+    return sequence;
+}
+
+int main() {
+    int term_count = 10; // You can change this value to print more terms
+    vector<unsigned long long> sequence = fibonacci_sequence_recursive_memoized(term_count);
+
+    cout << "Fibonacci series: ";
+    for (const auto& num : sequence) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
