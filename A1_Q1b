@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+unsigned long long loop_fib(int n) {
+    if (n == 0 || n == 1)
+        return n;
+
+    unsigned long long prev = 1;
+    unsigned long long prev_prev = 0;
+    unsigned long long current;
+
+    for (int i = 2; i <= n; i++) {
+        current = prev + prev_prev;
+        prev_prev = prev;
+        prev = current;
+    }
+    return current;
+}
+
+vector<unsigned long long> fibonacci_sequence_loop(int term_count) {
+    vector<unsigned long long> sequence;
+    for (int i = 0; i < term_count; i++) {  // Changed the loop to start from 0
+        sequence.push_back(loop_fib(i));
+    }
+    return sequence;
+}
+
+int main() {
+    int term_count = 10; // You can change this value to print more terms
+    vector<unsigned long long> sequence = fibonacci_sequence_loop(term_count);
+
+    cout << "Fibonacci series: ";
+    for (const auto& num : sequence) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
